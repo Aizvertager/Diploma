@@ -4,7 +4,7 @@ const regEx = () => {
     inputsNumbers.forEach((elem) => {
         
         elem.addEventListener('input', () => {
-            elem.value = elem.value.replace(/[^0-9]\+/, '');
+            elem.value = elem.value.replace(/[^0-9\+]/, '');
         });
 
     });
