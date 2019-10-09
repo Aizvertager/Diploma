@@ -2,7 +2,7 @@
 
 import sendForm from './modules/sendForm';
 import regEx from './modules/regEx';
-import showPopupPrice from './modules/showPopupPrice';
+import showPopup from './modules/showPopup';
 import moreInfo from './modules/moreInfo';
 
 // форма отправки
@@ -15,9 +15,9 @@ sendForm('formCheck');
 //а в полях "Ваше имя" только кириллица
 regEx();
 // скрытие/отображение модального окна
-showPopupPrice('#call-btn', '.popup-call');
-showPopupPrice('.discount-btn', '.popup-discount');
-showPopupPrice('.check-btn', '.popup-check');
-showPopupPrice('.director-btn', '.popup-consultation');
+showPopup('#call-btn', '.popup-call');
+showPopup('.discount-btn', '.popup-discount');
+showPopup('.check-btn', '.popup-check');
+showPopup('.director-btn', '.popup-consultation');
 moreInfo();
 
