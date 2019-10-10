@@ -1,5 +1,3 @@
-import showPopup from "./showPopup";
-
 const calc = () => {
 
     const constructBtn = document.querySelectorAll('.construct-btn'),
@@ -27,42 +25,47 @@ const calc = () => {
         });
 
         const checkWell = document.getElementById('myonoffswitch'),
+            accordion = document.getElementById('accordion'),
             secondWell = document.getElementById('second-well'),
-            selectMetr = document.querySelectorAll('.form-control');
+            selectMetr = document.querySelectorAll('.form-control'),
+            calcResult = document.getElementById('calc-result');
             secondWell.style.display = 'none';
+            selectMetr[2].disabled = true;
+            selectMetr[3].disabled = true;
 
-        checkWell.addEventListener('click', () => {
-            let price = 10000, result = 0;
-            if (checkWell.checked) {
-                secondWell.style.display = 'none';
-                selectMetr[2].disabled = true;
-            } else {
-                price = 15000;
-                secondWell.style.display = 'block';
+        accordion.addEventListener('click', (e) => {
+            let target = e.target,
+                price = 10000,
+                result;
+
+            if(target.matches('#myonoffswitch')) {
+                
+                if (target.checked) {
+                    secondWell.style.display = 'none';
+                    console.log(price);
+                } else {
+                    price = 15000;
+                    console.log('price: ', price);
+                    secondWell.style.display = 'block';
+                    selectMetr[2].disabled = false;
+                    selectMetr[3].disabled = false;
+                }
+
             }
-
         });
 
-        selectMetr.forEach((elem, index) => {
-            let sel = elem;
-            //.options[elem.selectedIndex].value
-            console.log('sel: ', sel);
-            // if (sel === '1.4 метра') {
-            //     if (sel === '1 штука') {
-            //         result += price;
-            //     } else if (sel === '2 штуки') {
-            //         result += price + price * 0.3;
-            //     } else if (sel === '3 штуки') {
-            //         result += price + price * 0.5;
-            //     }
-            // }
-        });
+        // checkWell.addEventListener('click', () => {
+        //     let price = 10000;
+        //     if (checkWell.checked) {
+        //         secondWell.style.display = 'none';
+        //     } else {
+        //         price = 15000;
+        //         secondWell.style.display = 'block';
+        //         selectMetr[2].disabled = false;
+        //         selectMetr[3].disabled = false;
+        //     }
 
-        // const sum = () => {
-        //     if()
-        // };
-
-        const calcResult = document.getElementById('calc-result');
+        // });
 
 };
 
