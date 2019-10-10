@@ -29,17 +29,15 @@ const calc = () => {
         const checkWell = document.getElementById('myonoffswitch'),
             secondWell = document.getElementById('second-well'),
             selectMetr = document.querySelectorAll('.form-control');
+            secondWell.style.display = 'none';
 
-        secondWell.style.display = 'none';
         checkWell.addEventListener('click', () => {
-            let price, result = 0;
+            let price = 10000, result = 0;
             if (checkWell.checked) {
-                price = 10000;
-                console.log('price: ', price);
                 secondWell.style.display = 'none';
+                selectMetr[2].disabled = true;
             } else {
                 price = 15000;
-                console.log('price: ', price);
                 secondWell.style.display = 'block';
             }
 

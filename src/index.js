@@ -31,7 +31,7 @@ moreInfo();
 //табы
 tabs('accordion', '.panel-heading-two', '.panel-collapse-two');
 tabs('accordion-two', '.panel-heading', '.panel-collapse');
-
+//форма "Получить консультанцию"
 addInputForm('director-form');
 //калькулятор
 calc();
