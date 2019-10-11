@@ -8,6 +8,7 @@ import tabs from './modules/tabs';
 import cancelTagAEvent from './modules/cancelTagAEvent';
 import addInputForm from './modules/addInputForm';
 import calc from './modules/calc';
+import addCalculatorForm from './modules/addCalculatorForm';
 
 //Отмена события у тега a
 cancelTagAEvent();
@@ -15,7 +16,6 @@ cancelTagAEvent();
 sendForm('formMain');
 sendForm('formCall');
 sendForm('formCallSecond');
-sendForm('formDiscount');
 sendForm('formCheck');
 //в инпутах, где вводится номер телефона, разрешен ввод только цифр, 
 //а в полях "Ваше имя" только кириллица
@@ -34,5 +34,7 @@ tabs('accordion-two', '.panel-heading', '.panel-collapse');
 //форма "Получить консультанцию"
 addInputForm('director-form');
 //калькулятор
-calc();
+// calc();
+//Отправка данных калькулятора и формы
+addCalculatorForm('formDiscount', calc());
 

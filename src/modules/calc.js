@@ -24,58 +24,119 @@ const calc = () => {
 
         });
 
-        const checkWell = document.getElementById('myonoffswitch'),
-            accordion = document.getElementById('accordion'),
-            secondWell = document.getElementById('second-well'),
-            selectMetr = document.querySelectorAll('.form-control'),
-            calcResult = document.getElementById('calc-result');
+        const accordion = document.getElementById('accordion'),
+            secondWell = document.getElementById('second-well');
             secondWell.style.display = 'none';
-            selectMetr[2].disabled = true;
-            selectMetr[3].disabled = true;
 
         accordion.addEventListener('change', (e) => {
-            let target = e.target,
-                price = 10000,
-                result = 0;
+            let target = e.target;
 
             if (target.matches('#myonoffswitch')) {
                 if(target.checked) {
                     secondWell.style.display = 'none';
-                    result += price;
                 } else {
                     secondWell.style.display = 'block';
-                    selectMetr[2].disabled = false;
-                    selectMetr[3].disabled = false;
-                    result += price + 5000;
                 }
-            } else if(target.matches('#myonoffswitch-two')) {
+            } 
 
-                if (target.checked) {
-                    result += 1000;
-                } else {
-                    result += 2000;
+            if (target.matches('#myonoffswitch') || target.matches('.form-control') ||
+            target.matches('#myonoffswitch-two') || target.matches('#homeDistance')) {
+                countSum();
+            }
+        });
+
+        const firstSwitch = document.getElementById('myonoffswitch'),
+            secondSwitch = document.getElementById('myonoffswitch-two'),
+            formControls = document.querySelectorAll('.form-control'),
+            calcResult = document.getElementById('calc-result'),
+            homeDistance = document.getElementById('homeDistance'),
+            calculator = {};
+
+        let firstSelect = formControls[0].options[formControls[0].selectedIndex].value, 
+            secondSelect = formControls[1].options[formControls[1].selectedIndex].value, 
+            thirdSelect = formControls[2].options[formControls[2].selectedIndex].value, 
+            fourthSelect = formControls[3].options[formControls[3].selectedIndex].value,
+            price,
+            typeWell, 
+            checkBottom;
+
+        const countSum = () => {
+
+            //Цена в зависимости от выбора количества колодцев
+            if(!firstSwitch.checked) { //2-х камерный колодец
+                price = 15000;
+                typeWell = 'Двухкамерный колодец';
+                console.log('typeWell: ', typeWell);
+
+                if (firstSelect === '2 метра') {
+                    price += price * 0.2;  
+                    
+                    if (secondSelect === '2 штуки') {
+                        price += price * 0.3;
+                    } else if (secondSelect === '3 штуки') {
+                        price += price * 0.5;
+                    } 
+                    
+                } 
+                
+                if (thirdSelect === '2 метра') {
+                    price += price * 0.2;  
+                    
+                    if (fourthSelect === '2 штуки') {
+                        price += price * 0.3;
+                    } else if (fourthSelect === '3 штуки') {
+                        price += price * 0.5;
+                    } 
+                    
+                }
+
+            } else { //однокамерный
+                price = 10000;
+                typeWell = 'Однокамерный колодец';
+                console.log('typeWell: ', typeWell);
+
+
+                if (firstSelect === '2 метра') {
+                    price += price * 0.2;
+
+                    if (secondSelect === '2 штуки') {
+                        price += price * 0.3;
+                    } else if (secondSelect === '3 штуки') {
+                        price += price * 0.5;
+                    }    
+
                 }
 
             }
 
-            console.log(result);
+            //Наличие днища
+            if(!secondSwitch.checked) {
+                price += 2000;
+                checkBottom = 'Нету дна';
+                console.log('checkBottom: ', checkBottom);
+            } else {
+                price += 1000;
+                checkBottom = 'Есть дно';
+                console.log('checkBottom: ', checkBottom);
+            }
 
-            calcResult.value = result;
-        });
+            console.log(homeDistance.value);
 
-        // checkWell.addEventListener('click', () => {
-        //     let price = 10000;
-        //     if (checkWell.checked) {
-        //         secondWell.style.display = 'none';
-        //     } else {
-        //         price = 15000;
-        //         secondWell.style.display = 'block';
-        //         selectMetr[2].disabled = false;
-        //         selectMetr[3].disabled = false;
-        //     }
+            calcResult.value = price;
 
-        // });
+            calculator.typeWell = typeWell;
+            calculator.firstSelect = firstSelect;
+            calculator.secondSelect = secondSelect;
+            calculator.thirdSelect = thirdSelect;
+            calculator.fourthSelect = fourthSelect;
+            calculator.checkBottom = checkBottom;
+            calculator.homeDistance = homeDistance.value;
+            calculator.calcResult = calcResult.value;
 
+        };
+
+    return calculator;
+        
 };
 
 export default calc;
