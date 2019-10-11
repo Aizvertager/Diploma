@@ -33,25 +33,34 @@ const calc = () => {
             selectMetr[2].disabled = true;
             selectMetr[3].disabled = true;
 
-        accordion.addEventListener('click', (e) => {
+        accordion.addEventListener('change', (e) => {
             let target = e.target,
                 price = 10000,
-                result;
+                result = 0;
 
-            if(target.matches('#myonoffswitch')) {
-                
-                if (target.checked) {
+            if (target.matches('#myonoffswitch')) {
+                if(target.checked) {
                     secondWell.style.display = 'none';
-                    console.log(price);
+                    result += price;
                 } else {
-                    price = 15000;
-                    console.log('price: ', price);
                     secondWell.style.display = 'block';
                     selectMetr[2].disabled = false;
                     selectMetr[3].disabled = false;
+                    result += price + 5000;
+                }
+            } else if(target.matches('#myonoffswitch-two')) {
+
+                if (target.checked) {
+                    result += 1000;
+                } else {
+                    result += 2000;
                 }
 
             }
+
+            console.log(result);
+
+            calcResult.value = result;
         });
 
         // checkWell.addEventListener('click', () => {

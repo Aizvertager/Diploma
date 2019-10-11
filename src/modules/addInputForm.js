@@ -7,17 +7,23 @@ const addInputForm = (idForm) => {
         checkValueMessage = 'Заполните поля';
 
     const form = document.getElementById(idForm),
+        formInputs = form.querySelectorAll('input'),
         directorQuestion = document.querySelector('.director-question'),
-        nameUser = document.getElementById('name_13'),
-        phoneUser = document.getElementById('phone_13'),
         statusMessage = document.createElement('div');
-        
-    statusMessage.style.cssText = `color:green;font-size:18px`;
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         form.appendChild(statusMessage);
+        for (let i = 0; i < formInputs.length; i++) {
+            if(formInputs[i].value === '') {
+                formInputs[i].style.cssText = `border: 2px solid red`;
+                statusMessage.style.cssText = `color:red`;
+                statusMessage.textContent = checkValueMessage;
+                return false;
+            }
+        }
         statusMessage.textContent = loadMessage;
+        statusMessage.style.cssText = `color:green;font-size:18px`;
 
         const formData = new FormData(form);
         formData.append('Question', directorQuestion.value);
@@ -34,22 +40,18 @@ const addInputForm = (idForm) => {
                     throw new Error('status network not 200');
                 }
                 statusMessage.textContent = successMessage;
-            })
-            .then(() => {
-                if(nameUser.value === '' && phoneUser.value === '') {
-                    nameUser.style.cssText = `border-color: red`;
-                    phoneUser.style.cssText = `border-color: red`;
-                    statusMessage.style.cssText = `color: red`;
-                    statusMessage.textContent = checkValueMessage;
+                statusMessage.style.cssText = `color:green;font-size:18px`;
+                if(response.status === 200) {
+                    form.reset();
+                    formInputs.forEach((elem) => {
+                        elem.style.cssText = `border: 1px solid #ddd;`;
+                    });
                 }
             })
             .catch((error) => {
                 statusMessage.style.cssText = `color: red`;
                 statusMessage.textContent = errorMessage;
                 console.error(error);
-            })
-            .then(() => {
-                form.reset();
             });
     });
 
