@@ -113,11 +113,9 @@ const calc = () => {
             if(!secondSwitch.checked) {
                 price += 2000;
                 checkBottom = 'Нету дна';
-                console.log('checkBottom: ', checkBottom);
             } else {
                 price += 1000;
                 checkBottom = 'Есть дно';
-                console.log('checkBottom: ', checkBottom);
             }
 
             calcResult.value = price;

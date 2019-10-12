@@ -23,7 +23,6 @@ const addCalculatorForm = (idForm, func) => {
         }
         statusMessage.textContent = loadMessage;
         statusMessage.style.cssText = `color:green;font-size:18px`;
-        console.log(vl);
         const formData = new FormData(form);
         //Создаем объект для AJAX
         let body = {};
@@ -34,7 +33,6 @@ const addCalculatorForm = (idForm, func) => {
 
         let all = {...body, ...vl};
 
-        console.log(all);
         postData(all)
             .then((response) => {
                 if(response.status !== 200) {
