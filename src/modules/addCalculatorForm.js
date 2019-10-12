@@ -1,7 +1,5 @@
 const addCalculatorForm = (idForm, func) => {
-
-    const vl = func;
-    console.log('vl: ', vl);
+    let vl = func;
     //создали сообщения
     const errorMessage = 'Произошла ошибка, проверьте правильно ли введены данные',
         loadMessage = 'Ваш запрос обрабатывается',
@@ -25,7 +23,7 @@ const addCalculatorForm = (idForm, func) => {
         }
         statusMessage.textContent = loadMessage;
         statusMessage.style.cssText = `color:green;font-size:18px`;
-
+        console.log(vl);
         const formData = new FormData(form);
         //Создаем объект для AJAX
         let body = {};

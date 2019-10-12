@@ -24,9 +24,9 @@ const calc = () => {
 
         });
 
-        const accordion = document.getElementById('accordion'),
-            secondWell = document.getElementById('second-well');
-            secondWell.style.display = 'none';
+    const accordion = document.getElementById('accordion'),
+        secondWell = document.getElementById('second-well');
+        secondWell.style.display = 'none';
 
         accordion.addEventListener('change', (e) => {
             let target = e.target;
@@ -51,22 +51,22 @@ const calc = () => {
             calcResult = document.getElementById('calc-result'),
             homeDistance = document.getElementById('homeDistance'),
             calculator = {};
-
-        let firstSelect = formControls[0].options[formControls[0].selectedIndex].value, 
-            secondSelect = formControls[1].options[formControls[1].selectedIndex].value, 
-            thirdSelect = formControls[2].options[formControls[2].selectedIndex].value, 
-            fourthSelect = formControls[3].options[formControls[3].selectedIndex].value,
-            price,
-            typeWell, 
-            checkBottom;
-
+        
         const countSum = () => {
+            let price,
+                typeWell,
+                checkBottom,
+                firstSelect = formControls[0].options[formControls[0].selectedIndex].value, 
+                secondSelect = formControls[1].options[formControls[1].selectedIndex].value, 
+                thirdSelect = formControls[2].options[formControls[2].selectedIndex].value, 
+                fourthSelect = formControls[3].options[formControls[3].selectedIndex].value;
 
             //Цена в зависимости от выбора количества колодцев
             if(!firstSwitch.checked) { //2-х камерный колодец
                 price = 15000;
                 typeWell = 'Двухкамерный колодец';
-                console.log('typeWell: ', typeWell);
+                calculator.diametrSecond = thirdSelect;
+                calculator.countRingsTwo = fourthSelect;
 
                 if (firstSelect === '2 метра') {
                     price += price * 0.2;  
@@ -93,8 +93,8 @@ const calc = () => {
             } else { //однокамерный
                 price = 10000;
                 typeWell = 'Однокамерный колодец';
-                console.log('typeWell: ', typeWell);
-
+                thirdSelect = '';
+                fourthSelect = '';
 
                 if (firstSelect === '2 метра') {
                     price += price * 0.2;
@@ -120,22 +120,18 @@ const calc = () => {
                 console.log('checkBottom: ', checkBottom);
             }
 
-            console.log(homeDistance.value);
-
             calcResult.value = price;
 
             calculator.typeWell = typeWell;
-            calculator.firstSelect = firstSelect;
-            calculator.secondSelect = secondSelect;
-            calculator.thirdSelect = thirdSelect;
-            calculator.fourthSelect = fourthSelect;
+            calculator.diametrFirst = firstSelect;
+            calculator.countRingsFirst = secondSelect;
             calculator.checkBottom = checkBottom;
             calculator.homeDistance = homeDistance.value;
             calculator.calcResult = calcResult.value;
 
         };
 
-    return calculator;
+        return calculator;
         
 };
 
